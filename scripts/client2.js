@@ -75,7 +75,7 @@ const loader2 = new GLTFLoader().load(
     mesh2 = gltf.scene;
     mesh2.position.set(1, 0.25, 0);
     mesh2.rotation.set(0, -360, 0);
-    mesh2.scale.set(.3, .3, .3); // <-- change this to (1, 1, 1) for photogrammetery model
+    mesh2.scale.set(.35, .35, .35); // <-- change this to (1, 1, 1) for photogrammetery model
     // Add model to scene
     scene.add(mesh2);
   },
