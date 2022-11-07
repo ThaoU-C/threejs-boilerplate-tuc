@@ -19,7 +19,7 @@ const camera = new THREE.PerspectiveCamera(
   50,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  1200
 );
 const renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0xdfdfdf);
@@ -34,11 +34,12 @@ var newMaterial = new THREE.MeshStandardMaterial({ color: 0x2E5939 });
 
 // Variable for GLTF data
 var mesh;
+var mesh2;
 
 // Load GLTF model, add material, and add it to the scene
 const loader = new GLTFLoader().load(
-  "../../assets/testing123fogv3.glb", // comment this line out and un comment the line below to swithc models
-  //"./assets/gourd_web.glb", //<-- photogrammetery model
+  "../../assets/robot_model_web2.glb", // comment this line out and un comment the line below to swithc models
+  // "../../assets/gourd_web.glb", //<-- photogrammetery model
   function(gltf) {
     // Scan loaded model for mesh and apply defined material if mesh is present
     gltf.scene.traverse(function(child) {
@@ -48,8 +49,8 @@ const loader = new GLTFLoader().load(
     });
     // set position and scale
     mesh = gltf.scene;
-    mesh.position.set(0, 0, 0);
-    mesh.rotation.set(45, 0, 0);
+    mesh.position.set(-2, 0, 0);
+    mesh.rotation.set(0, 0, 0);
     mesh.scale.set(.2, .2, .2); // <-- change this to (1, 1, 1) for photogrammetery model
     // Add model to scene
     scene.add(mesh);
@@ -59,6 +60,56 @@ const loader = new GLTFLoader().load(
     console.error(error);
   }
 );
+
+const loader2 = new GLTFLoader().load(
+  "../../assets/robot_model_web2.glb", // comment this line out and un comment the line below to swithc models
+  // "../../assets/gourd_web.glb", //<-- photogrammetery model
+  function(gltf) {
+    // Scan loaded model for mesh and apply defined material if mesh is present
+    gltf.scene.traverse(function(child) {
+      if (child.isMesh2) {
+        //child.material = newMaterial;
+      }
+    });
+    // set position and scale
+    mesh2 = gltf.scene;
+    mesh2.position.set(1, 0.25, 0);
+    mesh2.rotation.set(0, -360, 0);
+    mesh2.scale.set(.3, .3, .3); // <-- change this to (1, 1, 1) for photogrammetery model
+    // Add model to scene
+    scene.add(mesh2);
+  },
+  undefined,
+  function(error) {
+    console.error(error);
+  }
+);
+
+// const loader = new GLTFLoader().load(
+//   "../../assets/robot_model_web2.glb", // comment this line out and un comment the line below to swithc models
+//   // "../../assets/gourd_web.glb", //<-- photogrammetery model
+//   function(gltf) {
+//     // Scan loaded model for mesh and apply defined material if mesh is present
+//     gltf.scene.traverse(function(child) {
+//       if (child.isMesh) {
+//         //child.material = newMaterial;
+//       }
+//     });
+//     // set position and scale
+//     mesh = gltf.scene;
+//     mesh.position.set(0, 0, 0);
+//     mesh.rotation.set(45, 0, 0);
+//     mesh.scale.set(.2, .2, .2); // <-- change this to (1, 1, 1) for photogrammetery model
+//     // Add model to scene
+//     scene.add(mesh);
+//   },
+//   undefined,
+//   function(error) {
+//     console.error(error);
+//   }
+
+  
+// );
 
 // Add Orbit Controls
 const controls = new OrbitControls(camera, renderer.domElement);
